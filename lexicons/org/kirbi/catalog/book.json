@@ -1,0 +1,126 @@
+{
+  "lexicon": 1,
+  "id": "org.kirbi.catalog.book",
+  "description": "A record describing a book, using the 15 elements of the Dublin Core Metadata Element Set, Version 1.1.",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "Bibliographic description of a book. Field names match Dublin Core element names; repeatable elements are arrays.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["title", "createdAt"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "dc:title. A name given to the resource.",
+            "maxLength": 3000,
+            "maxGraphemes": 300
+          },
+          "creator": {
+            "type": "array",
+            "description": "dc:creator. Entities primarily responsible for making the resource, e.g. authors. Suggested form: 'Family, Given'.",
+            "maxLength": 50,
+            "items": { "type": "string", "maxLength": 1000, "maxGraphemes": 100 }
+          },
+          "subject": {
+            "type": "array",
+            "description": "dc:subject. Topics of the resource: keywords, key phrases, or classification codes (e.g. LCSH, DDC).",
+            "maxLength": 50,
+            "items": { "type": "string", "maxLength": 1000, "maxGraphemes": 100 }
+          },
+          "description": {
+            "type": "string",
+            "description": "dc:description. An account of the resource: abstract, table of contents, or free-text summary.",
+            "maxLength": 30000,
+            "maxGraphemes": 3000
+          },
+          "publisher": {
+            "type": "array",
+            "description": "dc:publisher. Entities responsible for making the resource available.",
+            "maxLength": 10,
+            "items": { "type": "string", "maxLength": 1000, "maxGraphemes": 100 }
+          },
+          "contributor": {
+            "type": "array",
+            "description": "dc:contributor. Entities responsible for making contributions to the resource, e.g. editors, translators, illustrators.",
+            "maxLength": 50,
+            "items": { "type": "string", "maxLength": 1000, "maxGraphemes": 100 }
+          },
+          "date": {
+            "type": "string",
+            "description": "dc:date. A point or period of time associated with an event in the lifecycle of the resource, usually publication. Recommended format: W3CDTF (YYYY, YYYY-MM, or YYYY-MM-DD).",
+            "maxLength": 64
+          },
+          "type": {
+            "type": "string",
+            "description": "dc:type. The nature or genre of the resource. Recommended: a term from the DCMI Type Vocabulary; books are normally 'Text'.",
+            "knownValues": [
+              "Collection",
+              "Dataset",
+              "Event",
+              "Image",
+              "InteractiveResource",
+              "MovingImage",
+              "PhysicalObject",
+              "Service",
+              "Software",
+              "Sound",
+              "StillImage",
+              "Text"
+            ],
+            "default": "Text",
+            "maxLength": 128
+          },
+          "format": {
+            "type": "array",
+            "description": "dc:format. File format, physical medium, or dimensions of the resource. Recommended: MIME types for digital editions (e.g. 'application/epub+zip'), free text for physical ones (e.g. 'hardcover', '784 p.').",
+            "maxLength": 10,
+            "items": { "type": "string", "maxLength": 256, "maxGraphemes": 100 }
+          },
+          "identifier": {
+            "type": "array",
+            "description": "dc:identifier. Unambiguous references to the resource. Recommended: URIs such as 'urn:isbn:9781492056355', 'https://doi.org/...', or 'https://www.wikidata.org/entity/Q...'.",
+            "maxLength": 20,
+            "items": { "type": "string", "maxLength": 1000 }
+          },
+          "source": {
+            "type": "array",
+            "description": "dc:source. Related resources from which the described resource is derived, e.g. the original work of a translation. URIs recommended.",
+            "maxLength": 20,
+            "items": { "type": "string", "maxLength": 1000 }
+          },
+          "language": {
+            "type": "array",
+            "description": "dc:language. Languages of the resource, as BCP 47 language tags (e.g. 'en', 'pt-BR').",
+            "maxLength": 10,
+            "items": { "type": "string", "format": "language" }
+          },
+          "relation": {
+            "type": "array",
+            "description": "dc:relation. Related resources, e.g. other editions, volumes of a series, or other org.kirbi.catalog.book records (as at:// URIs). URIs recommended.",
+            "maxLength": 50,
+            "items": { "type": "string", "maxLength": 1000 }
+          },
+          "coverage": {
+            "type": "array",
+            "description": "dc:coverage. Spatial or temporal topics of the resource, e.g. place names or historical periods.",
+            "maxLength": 20,
+            "items": { "type": "string", "maxLength": 1000, "maxGraphemes": 100 }
+          },
+          "rights": {
+            "type": "string",
+            "description": "dc:rights. Information about rights held in and over the resource: a statement, or a license URI.",
+            "maxLength": 10000,
+            "maxGraphemes": 1000
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Client-declared timestamp when this record was created. Not a Dublin Core element; this is the AT Protocol convention."
+          }
+        }
+      }
+    }
+  }
+}
